@@ -4,7 +4,9 @@
 			<Logo title="Melhor Rastreio" />
 
 			<div class="navbar-end">
-				<ul class="menu">
+				<button @click.prevent="openMenu" :class=" isOpen ? 'burger-button is-open' : 'burger-button' "></button>
+
+				<ul :class=" isOpen ? 'menu is-open' : 'menu' ">
 					<li v-for="(item, index) in menu" class="menu__item">
 						<a 
 						:key="index"
@@ -30,11 +32,18 @@
 		},
 		data(){
 			return{
+				isOpen: true,
 				menu: [
 					{ title: 'Melhor Envio', url: 'https://melhorenvio.com.br/', button: false },
 					{ title: 'Login', url: '#', button: false },
 					{ title: 'cadastre-se', url: '#', button: true }
 				]
+			}
+		},
+
+		methods: {
+			openMenu(){
+				this.isOpen = !this.isOpen
 			}
 		}
 	}
@@ -63,20 +72,104 @@
 		.container
 			display flex
 			justify-content space-between
+			
+		.burger-button
+			width 42px
+			height 30px
+			background transparent
+			border 0px
+			position relative
+			margin-top 0.5rem
+			cursor pointer
+			outline none
+			
+			@media screen and (min-width: 768px)
+				display none
+			
+			&.is-open
+				&:before, &:after
+					border none
+					width 100%
+					height 3px
+					top 50%
+					left 50%
+					background white
+				&:before					
+					transform translateX(-50%) translateY(-50%) rotate(45deg)
+				&:after
+					transform translateX(-50%) translateY(-50%) rotate(-45deg)
+			
+			&:before
+				content ''
+				position absolute
+				top 0
+				left 0
+				width 100%
+				height 100%
+				border-top 3px solid white
+				border-bottom 3px solid white
+				transition 100ms linear all
+			
+			&:after
+				content ''
+				position absolute
+				top 60%
+				left 0
+				width 100%
+				height 3px
+				background white
+				transform translateY(-50%)
+				transition 200ms linear all		
 		
 		.menu
+			margin 0
+			position fixed
+			bottom 0 
+			left 0
+			height 100vh
+			width 70%
+			background white
+			padding 2rem 0
+			opacity 0
+			text-align center
+			box-shadow 10px 0 10px rgba(black, 0.2)
+			transform translateX(-110%)
+			transition 250ms linear all
+			
+			&.is-open
+				opacity 1
+				transform translateX(0)
+			
+			@media screen and (min-width: 768px)
+				background transparent
+				position relative
+				height auto
+				padding 0
+				opacity 1
+				width auto
+				text-align left
+				box-shadow none
+				transform translateX(0)
+			
 			.menu__item
-				display inline-block
+				margin-bottom 1rem
 				font-size 1.2rem
 				
-				&:not(:first-of-type)
-					margin-left 3rem
+				@media screen and (min-width: 768px)
+					margin 0
+					display inline-block
+					&:not(:first-of-type)
+						margin-left 3rem
 					
 			.menu__item__link
 				display block
-				color white
+				color green
 				text-decoration none
 				position relative
+				
+				@media screen and (min-width: 768px)
+					color white
+
 				&:after
 					content ''
 					position absolute
@@ -97,18 +190,26 @@
 				&--button
 					background white
 					padding 0.5rem
+					display block
 					border-radius 0.5rem
 					color green
 					text-decoration none
-					border 1px solid white
-					transition .2s ease all
+					border 1px solid green
+					transition .25s ease all
+					max-width 50%
+					margin 0 auto
+					
+					@media screen and (min-width: 768px)
+						max-width 100%
+						margin 0
+						border-color white
 					
 					&:hover
 						background darken(green, 10%)
 						border-color darken(green, 10%)
 						color white
-						box-shadow 0 2px 5px rgba(black, 0.25)
-		
+						box-shadow 0 2px 3px rgba(black, 0.2)
+						
 		@media screen and (min-width: 768px)
 			min-height 88px
 			padding 20px 0

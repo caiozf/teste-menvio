@@ -15,6 +15,9 @@ export default {
 	.home
 		height 100vh
 		background-color green
-		background-image url('../assets/img/background.jpg')
+		background-image url('../assets/img/background-mobile.jpg')
 		background-size cover
+		
+		@media screen and (min-width: 768px)
+			background-image url('../assets/img/background.jpg')
 </style>
