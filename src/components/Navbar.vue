@@ -32,7 +32,7 @@
 		},
 		data(){
 			return{
-				isOpen: true,
+				isOpen: false,
 				menu: [
 					{ title: 'Melhor Envio', url: 'https://melhorenvio.com.br/', button: false },
 					{ title: 'Login', url: '#', button: false },

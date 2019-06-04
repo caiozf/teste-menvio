@@ -5,12 +5,12 @@
 yarn install ou npm install
 ```
 
-### Compiles and hot-reloads for development
+### Servidor de desenvolvimento
 ```
 yarn serve ou npm run serve
 ```
 
-### Compiles and minifies for production
+### Geração de build de produção
 ```
 yarn run build ou npm run build
 ```
