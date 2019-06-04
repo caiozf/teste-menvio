@@ -1,0 +1,26 @@
+{
+	"data": {
+		"id": "ee0315da-f2af-40d4-8990-7097e28a08c4",
+		"tracking": "PM371835103BR",
+		"status": "encaminhado",
+		"events": [
+			{
+				"status": "encaminhado",
+				"location": "CDD CAMPO BOM - CAMPO BOM/RS",
+				"created_at": "2018-08-24 11:50:00"
+			},
+			{
+				"status": "postado",
+				"location": "CTCE PORTO ALEGRE - POA/RS",
+				"created_at": "2018-08-23 18:50:00"
+			},
+			{
+				"status": "coletado",
+				"location": "CTCE PORTO ALEGRE - POA/RS",
+				"created_at": "2018-08-23 11:50:00"
+			}
+		],
+		"created_at": "2018-08-23 11:50:00",
+		"updated_at": "2018-08-24 11:50:00"
+	}
+}
