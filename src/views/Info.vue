@@ -1,11 +1,10 @@
 <template>	
 	<div>
-		<section class="info">
+		<section class="info" v-if="!loading">
 			<div class="container">
 				<h2 class="section-title">Informações do Rastreio</h2>
 
-				<ul class="timeline">
-				</ul>
+				<Timeline :status="delivery.status" />
 
 				<div class="status">
 					<div class="status__header">
@@ -27,7 +26,7 @@
 
 								<article class="status__info">
 									<h3>{{ status.status }}</h3>
-									<p>{{ status.created_at | formatData }}</p>
+									<p>{{ new Date(status.created_at) }}</p>
 								</article>	
 							</div>
 
@@ -44,23 +43,34 @@
 
 <script>
 	import { mapState } from 'vuex'
+	import Timeline from '@/components/Timeline'
 
 	export default {
 		name: 'Info',
 
+		components: {
+			Timeline
+		},
+
 		data(){
 			return{
+				loading: true,
 				icons: [
 					require('@/assets/img/status-encaminhado.svg'),
 					require('@/assets/img/status-postado.svg'),
 					require('@/assets/img/status-coleta.svg')
-				]
+				],
 			}
 		},
+
 
 		computed: mapState({
 			delivery: state => state.currentDelivery
 		}),
+		
+		mounted(){
+			this.loading = false
+		},
 
 		filters: {
 			formatData: (data) => {
@@ -72,12 +82,18 @@
 
 <style lang="stylus" scoped>
 	$gray = #333
+	$green = #2BC866
 	
 	.info
-		padding 25% 1rem 3rem
+		padding 25% 1rem 0
 		@media screen and (min-width: 768px)
-			padding-top 9.1875rem
-			height 85vh
+			padding-top 8.1875rem
+			min-height 100vh	
+	.container
+		@media screen and (min-width: 768px)
+			max-width 873px
+			margin 0 auto
+			padding 0
 	.status
 		width 100%
 		box-shadow 0 0 40px rgba(black, 0.15)

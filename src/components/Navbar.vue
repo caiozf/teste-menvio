@@ -102,6 +102,12 @@
 			.logo
 				path
 					fill white
+		&:not(.is-home)
+			@media screen and (min-width: 768px)
+				.container
+					max-width 873px
+					margin 0 auto
+					padding 0
 		
 		.container
 			display flex
