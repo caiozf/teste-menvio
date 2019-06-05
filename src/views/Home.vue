@@ -58,6 +58,7 @@ export default {
 		background-color $green
 		background-image url('../assets/img/background-mobile.jpg')
 		background-size cover
+		position relative
 		
 		@media screen and (min-width: 768px)
 			background-image url('../assets/img/background.jpg')

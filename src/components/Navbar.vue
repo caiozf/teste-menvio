@@ -1,29 +1,37 @@
 <template>
-	<nav :class="this.$route.name == 'Home' ? 'navbar is-home' : 'navbar' ">
-		<div class="container">
-			<Logo title="Melhor Rastreio" />
+	<div :class=" scrolled ? 'scrolled' : '' ">
+		<nav :class=" this.$route.name == 'Home' ? 'navbar is-home' : 'navbar' ">
+			<div class="container">
+				<Logo title="Melhor Rastreio" />
 
-			<div class="navbar-end">
-				<button @click.prevent="openMenu" :class=" isOpen ? 'burger-button is-open' : 'burger-button' "></button>
+				<div v-if=" this.$route.name === 'Home' " class="navbar-end">
+					<button @click.prevent="openMenu" :class=" isOpen ? 'burger-button is-open' : 'burger-button' "></button>
 
-				<ul :class=" isOpen ? 'menu is-open' : 'menu' ">
-					<li v-for="(item, index) in menu" class="menu__item">
-						<a 
-						:key="index"
-						:href="item.url"
-						:class="item.button ? 'menu__item__link--button' : 'menu__item__link' "
-						>
-						{{ item.title }}	
-						</a>
-					</li>
-				</ul>
+					<ul :class=" isOpen ? 'menu is-open' : 'menu' ">
+						<li v-for="(item, index) in menu" class="menu__item">
+							<a 
+							:key="index"
+							:href="item.url"
+							:class="item.button ? 'menu__item__link--button' : 'menu__item__link' "
+							>
+							{{ item.title }}	
+							</a>
+						</li>
+					</ul>
+				</div>
+
+				<div v-else class="tracking-code">
+					<h1 class="tracking-title">Correios</h1>
+					<h2 class="tracking-subtitle">{{ delivery.tracking }}</h2>
+				</div>
 			</div>
-		</div>
-	</nav>
+		</nav>
+	</div>
 </template>
 
 <script>
 	import Logo from '@/components/Logo'
+	import { mapState } from 'vuex'
 
 	export default{
 		name: 'Navbar',
@@ -37,20 +45,43 @@
 					{ title: 'Melhor Envio', url: 'https://melhorenvio.com.br/', button: false },
 					{ title: 'Login', url: '#', button: false },
 					{ title: 'cadastre-se', url: '#', button: true }
-				]
+				],
+				scrolled: false
 			}
+		},
+
+		created(){
+			window.addEventListener('scroll', this.handleScroll)
 		},
 
 		methods: {
 			openMenu(){
 				this.isOpen = !this.isOpen
+			},
+
+			handleScroll(e){
+				if(window.scrollY > 200){
+					this.scrolled = true
+				}else{
+					this.scrolled = false
+				}
 			}
-		}
+		},
+		computed: mapState({
+			delivery: state => state.currentDelivery
+		})
 	}
 </script>
 
 <style lang="stylus">
-	green = #2BC866
+	$green = #2BC866
+	$gray = #333333
+	
+	.scrolled
+		.navbar
+			&.is-home
+				background $green
+				box-shadow 0 10px 10px rgba(black, 0.2)
 	
 	.navbar
 		display flex
@@ -61,10 +92,13 @@
 		position fixed
 		top 0
 		left 0
+		z-index 1
+		transition 200ms ease all
+		box-shadow 0 10px 10px rgba(black, 0.2)
 		
 		&.is-home
 			background transparent
-			
+			box-shadow none
 			.logo
 				path
 					fill white
@@ -119,7 +153,18 @@
 				height 3px
 				background white
 				transform translateY(-50%)
-				transition 200ms linear all		
+				transition 200ms linear all
+		
+		.tracking-code
+			color $gray
+			text-align right
+			
+			.tracking-title
+				font-weight lighter
+				font-size 1.2rem
+				margin 0
+			.tracking-subtitle
+				margin 0	
 		
 		.menu
 			margin 0
@@ -135,6 +180,7 @@
 			box-shadow 10px 0 10px rgba(black, 0.2)
 			transform translateX(-110%)
 			transition 250ms linear all
+			z-index 2
 			
 			&.is-open
 				opacity 1
@@ -163,7 +209,7 @@
 					
 			.menu__item__link
 				display block
-				color green
+				color $green
 				text-decoration none
 				position relative
 				
@@ -192,9 +238,9 @@
 					padding 0.5rem
 					display block
 					border-radius 0.5rem
-					color green
+					color $green
 					text-decoration none
-					border 1px solid green
+					border 1px solid $green
 					transition .25s ease all
 					max-width 50%
 					margin 0 auto
@@ -205,8 +251,8 @@
 						border-color white
 					
 					&:hover
-						background darken(green, 10%)
-						border-color darken(green, 10%)
+						background darken($green, 10%)
+						border-color darken($green, 10%)
 						color white
 						box-shadow 0 2px 3px rgba(black, 0.2)
 						

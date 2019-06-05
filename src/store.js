@@ -5,12 +5,18 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
-
+  	currentDelivery: null
   },
+  
   mutations: {
-
+  	ASSIGN_DATA(state, data){
+  		state.currentDelivery = data
+  	}
   },
-  actions: {
 
+  actions: {
+  	trackDelivery({ state, commit }, payload){
+  		commit('ASSIGN_DATA', payload)
+  	}
   }
 })
