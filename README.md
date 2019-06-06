@@ -18,4 +18,4 @@ Passos para a execução do projeto:
 
 5) Rodar o comando *npm run serve* para iniciar o projeto, a porta será indicada no terminal
 
-** Urls das views sao "/"  e "/info" **
+**Urls das views sao "/"  e "/info"**
