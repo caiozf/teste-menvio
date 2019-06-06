@@ -93,7 +93,7 @@
 			<li v-for="(status, index) in statusList">
 				<span class="status-info">
 					<h3 :class="index < tracking.length ? 'status-title active' : 'status-title' ">{{ status }}</h3>
-					<p v-if="index < tracking.length"> {{ tracking[index].created_at }} </p>
+					<p v-if="index < tracking.length"> {{ tracking[index].created_at | formatData }} </p>
 				</span> 
 			</li>
 		</ul>
@@ -101,6 +101,8 @@
 </template>
 
 <script>
+	import moment from 'moment'
+
 	export default{
 		name: 'Timeline',
 		data(){
@@ -111,6 +113,12 @@
 		props: {
 			status: String,
 			tracking: Array
+		},
+
+		filters: {
+			formatData: (data) => {
+				return moment(data).format('D/MM/YYYY h:mm')
+			}
 		}
 	}
 </script>

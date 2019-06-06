@@ -26,7 +26,7 @@
 
 								<article class="status__info">
 									<h3>{{ status.status }}</h3>
-									<p>{{ new Date(status.created_at) }}</p>
+									<p>{{ new Date(status.created_at) | formatData }}</p>
 								</article>	
 							</div>
 
@@ -44,6 +44,7 @@
 <script>
 	import { mapState } from 'vuex'
 	import Timeline from '@/components/Timeline'
+	import moment from 'moment'
 
 	export default {
 		name: 'Info',
@@ -74,7 +75,7 @@
 
 		filters: {
 			formatData: (data) => {
-				return data.replace(new RegExp('-', 'g'), '/')
+				return moment(data).format('D/MM/YYYY h:mm')
 			}
 		}
 	}
