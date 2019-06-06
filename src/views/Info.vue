@@ -4,7 +4,7 @@
 			<div class="container">
 				<h2 class="section-title">Informações do Rastreio</h2>
 
-				<Timeline :status="delivery.status" />
+				<Timeline :status="delivery.status" :tracking="this.delivery.events"/>
 
 				<div class="status">
 					<div class="status__header">
@@ -85,10 +85,10 @@
 	$green = #2BC866
 	
 	.info
-		padding 25% 1rem 0
+		padding 25% 1rem 4rem
 		@media screen and (min-width: 768px)
 			padding-top 8.1875rem
-			min-height 100vh	
+			min-height 85vh	
 	.container
 		@media screen and (min-width: 768px)
 			max-width 873px

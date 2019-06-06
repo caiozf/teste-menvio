@@ -92,8 +92,8 @@
 		<ul class="status-text">
 			<li v-for="(status, index) in statusList">
 				<span class="status-info">
-					<h3 class="status-title">{{ status }}</h3>
-					<p></p>
+					<h3 :class="index < tracking.length ? 'status-title active' : 'status-title' ">{{ status }}</h3>
+					<p v-if="index < tracking.length"> {{ tracking[index].created_at }} </p>
 				</span> 
 			</li>
 		</ul>
@@ -108,12 +108,16 @@
 				statusList: ['Coleta', 'Postado', 'Encaminhado', 'Saiu para Entrega', 'Entregue']
 			}
 		},
-		props: ['status']
+		props: {
+			status: String,
+			tracking: Array
+		}
 	}
 </script>
 
 <style lang="stylus" scoped>
 	$green = #2BC866
+	$lightgray = #C8CDDA
 	
 	.timeline
 		width 100%
@@ -201,19 +205,31 @@
 			.icon-5
 				path
 					fill $green
+	.status-title
+		font-weight lighter
+		color $lightgray
+		&.active
+			font-weight bold
+			color $green
 	.status-text
 		display flex
 		width 100%
+		
 		li
 			flex 1
 			text-align center
-			min-height 150px
+			min-height 80px
 			position relative
 			
 			.status-info
 				position absolute
 				p, h1,h2,h3,h4
 					margin 0
+				p
+					font-size 1rem
+					margin-top 0.5rem
+					@media screen and (min-width: 768px)
+						font-size 14px
 			
 			&:first-of-type
 				.status-info
@@ -234,10 +250,10 @@
 				.status-info
 					top 0
 					left 0
-					transform translate(25%, -30%)	
+					transform translate(25%, -65%)	
 			&:last-of-type
 				.status-info
 					top 0
 					right 0
-					transform translate(20%, -30%)			
+					transform translate(0, -65%)			
 </style>

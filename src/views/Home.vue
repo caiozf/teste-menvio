@@ -19,35 +19,14 @@
 	  		</div>	
 	  	</div>
 	  </section>
-	  <footer class="footer">
-	  	<div class="footer-text">
-	  		<p>Transportadoras</p>
-	  	</div>
-
-	  	<ul class="shippers-list">
-	  		<li v-for="shipper in shippers" class="footer-list__item">
-	  			<figure :key="shipper.name" class="shipper-image">
-	  				<img :src="shipper.img" :alt="shipper.name">
-	  			</figure>
-	  		</li>
-	  	</ul>
-	  </footer>
+	  <Footer />
 	</div>
 </template>
 
 <script>
-export default {
-  name: 'Home',
-  data(){
-  	return{
-  		shippers: [
-  			{ name: 'Correios', img: require('@/assets/img/correios.png') },
-  			{ name: 'Correios', img: require('@/assets/img/jadlog.png') },
-  			{ name: 'Correios', img: require('@/assets/img/viabrasil.png') }
-  		]	
-  	}
-  }
-}
+	export default {
+	  name: 'Home'
+	}
 </script>
 
 <style lang="stylus" scoped>
@@ -125,16 +104,17 @@ export default {
 
 		.hero__content
 			padding 25% 1rem 3rem
-			
+			overflow hidden
 			@media screen and (min-width: 768px)
 				display flex
 				align-items center
 				max-width 1200px
 				margin 0 auto
-				padding-top 9.1875rem
+				padding-top 9%
 				.content__left, .content__right
 					flex 1
-			
+			@media screen and (min-width: 1600px)
+				padding-top 11%
 			.content__left
 				color white
 				text-align center
@@ -145,33 +125,6 @@ export default {
 			.content__right
 				@media screen and (min-width: 768px)
 					text-align center
-	
-	.footer
-		padding 2rem 3.75rem
-		@media screen and (min-width: 768px)
-			display flex
-			align-items center
-		.footer-text
-			@media screen and (min-width: 768px)
-				flex 1
-			p
-				@media screen and (min-width: 768px)
-					margin 0
-		.shippers-list
-			display grid
-			grid-template-columns 1fr 1fr
-			grid-gap 1rem
-			@media screen and (min-width: 768px)
-				max-width 40%
-				grid-template-columns 1fr 1fr 1fr
-			
-			.footer-list__item
-				display flex
-				align-items center
-
-		@media screen and (min-width: 768px)
-			height 15vh
-			padding 2rem 172px
 			
 	@keyframes move{
 		from{

@@ -2,20 +2,21 @@
 	<div :class=" scrolled ? 'scrolled' : '' ">
 		<nav :class=" this.$route.name == 'Home' ? 'navbar is-home' : 'navbar' ">
 			<div class="container">
+				<router-link :to="{ name: 'Home' }">
 				<Logo title="Melhor Rastreio" />
-
+				</router-link>
 				<div v-if=" this.$route.name === 'Home' " class="navbar-end">
 					<button @click.prevent="openMenu" :class=" isOpen ? 'burger-button is-open' : 'burger-button' "></button>
 
 					<ul :class=" isOpen ? 'menu is-open' : 'menu' ">
 						<li v-for="(item, index) in menu" class="menu__item">
-							<a 
+							<router-link
 							:key="index"
-							:href="item.url"
+							:to="{ name: 'Info' }"
 							:class="item.button ? 'menu__item__link--button' : 'menu__item__link' "
 							>
 							{{ item.title }}	
-							</a>
+							</router-link>
 						</li>
 					</ul>
 				</div>
@@ -42,9 +43,9 @@
 			return{
 				isOpen: false,
 				menu: [
-					{ title: 'Melhor Envio', url: 'https://melhorenvio.com.br/', button: false },
-					{ title: 'Login', url: '#', button: false },
-					{ title: 'cadastre-se', url: '#', button: true }
+					{ title: 'Melhor Envio', button: false },
+					{ title: 'Login', button: false },
+					{ title: 'cadastre-se', button: true }
 				],
 				scrolled: false
 			}
